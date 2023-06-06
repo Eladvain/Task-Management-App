@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express()
-// const package = require('pkg.json');
 const path = require('path');
 const cors = require('cors');
+const mySqlConnection = require('./config/db')
 
 
 const  port = 2718;
 
-// const bookRoute = require("./backend/router/book");
+const taskRoute = require("./routers/taskRouter");
 // const authorRoute = require("./backend/router/author");
 
 // const utills = require("./utills");
@@ -35,7 +35,7 @@ function content_type_from_extension( url)
 const set_content_type = function (req, res, next) 
 {
 	const content_type = 
-	(req.baseUrl == '/book' || req.baseUrl == '/author' ) ? 
+	(req.baseUrl == '/task' || req.baseUrl == '/author' ) ? 
 	"application/json; charset=utf-8" : 
 	content_type_from_extension( req.url)
 	res.setHeader("Content-Type", content_type);
@@ -51,7 +51,7 @@ app.use(express.urlencoded( // to support URL-encoded bodies
 }));
 app.use(cors());
 
-//  app.use("/book", bookRoute);
+ app.use("/tasks", taskRoute);
 // app.use("/author", authorRoute);
 
 app.use(express.static(path.join(__dirname, 'front'))); 
@@ -79,6 +79,10 @@ let msg = `MTABOOK  listening at port ${port}`
  app.listen(port, () => 
  { 
    console.log( msg ) ;
+   mySqlConnection.connect((error) => {
+    if (error) throw error;
+    console.log('Connected to MySQL database!');
+  });
  })
 
 
