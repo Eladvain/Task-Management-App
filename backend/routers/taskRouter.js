@@ -71,7 +71,7 @@ async function create_new_task(req, res)
   let startDate = `${day}/${month}/${year}`;
   console.log("start date = "+startDate)
 
-  const sqlQuery = `INSERT INTO task(name,start_date,end_date,status,description) VALUES ("${name}","${startDate}","${endDate}","${status}","${description}");`;
+  const sqlQuery = `INSERT INTO task(name,start_date,end_date,status_task,description) VALUES ("${name}","${startDate}","${endDate}","${status}","${description}");`;
   connection.query(sqlQuery, function(err, result) {
     if(err){
       throw err.message;
@@ -81,11 +81,26 @@ async function create_new_task(req, res)
 
 }
 
+async function update_task(req, res)
+{
+  const {id, field, value} = req.body;
+  console.log("id = "+id+", field = "+field+", value = "+value);
+  const sqlQuery = `Update task Set ${field}="${value}" Where id=${id};`;
+  connection.query(sqlQuery, function(err, result) {
+    if(err){
+      throw err.message;
+    }
+    res.send({msg : "update in database"});
+  })
+}
+
 router.get('/task',  (req, res) => { list_all_tasks(req, res) });
 router.get('/task/(:id)',  (req, res) => { get_task_by_id(req, res) });
 router.get('/byStatusInProcess',  (req, res) => { get_task_by_status_done(req, res) });
 
 router.post('/task',  (req, res) => { create_new_task(req, res) });
+
+router.put('/task',  (req, res) => { update_task(req, res) });
 
 
 router.use( set_content_type );
