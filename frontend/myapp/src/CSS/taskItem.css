@@ -7,7 +7,7 @@
 
 .task-container:hover{
   background-color: yellow;
-  transform: scale(1.2); 
+  transform: scale(1.1); 
 }
 
 .nameOfTask{
