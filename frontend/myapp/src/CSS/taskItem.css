@@ -2,7 +2,15 @@
   border: 1px solid green ;
   width: 32%;
   float: left;
+  transition: transform .2s;
 }
+
+.task-container:hover{
+  background-color: yellow;
+  transform: scale(1.2); 
+}
+
 .nameOfTask{
+  text-align: center;
   color: aqua;
 }

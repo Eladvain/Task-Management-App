@@ -5,7 +5,7 @@ const TaskItem = ({taskItem}) => {
   return (
     <div className='task-container'>
       <h1 className='nameOfTask'>{taskItem.name}</h1>
-      <span> {taskItem.description} </span>
+      <label> desc :{taskItem.description !== "" ? taskItem.description : "none"}  </label>
       <br/>
       <label>start date : {taskItem.start_date}</label>
       <br/>
