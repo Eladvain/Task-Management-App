@@ -1,0 +1,8 @@
+.task-container{
+  border: 1px solid green ;
+  width: 32%;
+  float: left;
+}
+.nameOfTask{
+  color: aqua;
+}

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import TaskItem from './TaskItem';
+import taskListCss from '../CSS/taskList.css'
 
 
 const TaskList = () => {
 
   const [taskList, setTaskList] = useState([]);
-
-  // useEffect(()=>{
-  //   console.log("shopping cart books = "+JSON.stringify(shoppingCartBooks));
-  // }, [shoppingCartBooks])
 
   useEffect(() => {
     async function updateTaskList(){
@@ -39,10 +36,12 @@ const TaskList = () => {
 
 
   return (
-    <div>
+    <div className='task-list'>
+      {/* <div className='task-list-2'> */}
       {taskList.map((task,key) =>{
         return <TaskItem taskItem = {task}/>
       })}
+      {/* </div> */}
     </div>
   )
   }
