@@ -57,6 +57,7 @@ const EditTask = () => {
     let updateObject = "";
     let response;
     console.log("in update task");
+    if(statusChecked === true && statusOption === "") return;
     if(descChecked === true){
        updateObject = {
         "id" : task.id,
@@ -64,6 +65,21 @@ const EditTask = () => {
         "value" : `${descInput}`
       }
     }
+    else if(nameChecked === true){
+      updateObject = {
+        "id" : task.id,
+        "field" : "name",
+        "value" : `${inputName}`
+      }
+    }
+    else if(statusChecked === true && statusOption!==""){
+      updateObject = {
+        "id" : task.id,
+        "field" : "status_task",
+        "value" : `${statusOption}`
+      }
+    }
+
       try {
         response = await fetch(`http://localhost:2718/tasks/task`, {
             method: 'PUT',
@@ -85,6 +101,15 @@ const EditTask = () => {
 
   const changeDescription = (event)=>{
     setDescInput(event.target.value);
+    event.preventDefault();
+  }
+  const changeName = (event)=>{
+    setInputName(event.target.value);
+    event.preventDefault();
+  }
+  const changeStatus = (event)=>{
+    console.log("status = "+event.target.value)
+    setStatusOption(event.target.value);
     event.preventDefault();
   }
 
@@ -120,13 +145,13 @@ const EditTask = () => {
         <div className='updateStatus'>
             <label id ='status-label' htmlFor="status-select">Choose status of task: </label>
 
-            <select name="status_task" id="status-select">
+            <select name="status_task" id="status-select" onChange={changeStatus}>
             <option value="">--Please choose an option--</option>
-            <option value="">In process</option>
-            <option value="">Done</option>
+            <option value="In process">In process</option>
+            <option value="Done">Done</option>
             </select>
             </div>
-          <button className='submit-button'>update</button>
+          <button className='submit-button' onClick={updateTask}>update</button>
         </div>
         :""}
           {descChecked === true ? 
@@ -150,7 +175,12 @@ const EditTask = () => {
         <div className='update-name'>
             <div className='updateName'>
             <label id="name-label" htmlFor="name-label">change name of task:   </label>
-            <input type="text" id="name-input" name="name-input"></input>
+            <input type="text" 
+                   id="name-input" 
+                   name="name-input"
+                   onChange={changeName}
+                   value={inputName}>
+                   </input>
             </div>
           <button className='submit-button' onClick={updateTask}>update</button>
         </div>
