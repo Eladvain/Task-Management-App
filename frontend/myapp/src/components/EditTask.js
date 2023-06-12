@@ -9,6 +9,10 @@ const EditTask = () => {
   const [descChecked, setDescChecked] = useState(false);
   const [nameChecked, setNameChecked] = useState(false);
 
+  const [statusOption, setStatusOption] = useState('');
+  const [inputName, setInputName] = useState('');
+  const [descInput, setDescInput] = useState('');
+
   const location = useLocation();
   const {task} = location.state;
 
@@ -47,6 +51,42 @@ const EditTask = () => {
     }
     setNameChecked(!nameChecked);
   };
+
+  async function updateTask()
+  {
+    let updateObject = "";
+    let response;
+    console.log("in update task");
+    if(descChecked === true){
+       updateObject = {
+        "id" : task.id,
+        "field" : "description",
+        "value" : `${descInput}`
+      }
+    }
+      try {
+        response = await fetch(`http://localhost:2718/tasks/task`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body : JSON.stringify(updateObject)
+        })
+    } catch (e) {
+        console.log("the error is:", e)
+    }
+    console.log("heree in update task after clicked");
+    console.log("response = "+response);
+    const update_res = await response.json();
+    const update_msg = update_res["msg"];
+    console.log("update_msg = "+update_msg);
+    
+  }
+
+  const changeDescription = (event)=>{
+    setDescInput(event.target.value);
+    event.preventDefault();
+  }
 
 
   return (
@@ -93,9 +133,15 @@ const EditTask = () => {
         <div className='update-description'>
           <div className='updateDescription'>
             <label id="description-label" htmlFor="description-label">change description to task:   </label>
-            <textarea id="description-textarea" name="" rows="4" maxLength="100" placeholder='type here...'></textarea>
+            <textarea id="description-textarea" 
+                      name="" 
+                      rows="4" 
+                      maxLength="100" 
+                      placeholder='type here...'
+                      onChange={changeDescription}
+                      value={descInput}></textarea>
           </div>
-          <button className='submit-button'>update</button>
+          <button className='submit-button' onClick={updateTask}>update</button>
         </div>
         
         :""}
@@ -106,7 +152,7 @@ const EditTask = () => {
             <label id="name-label" htmlFor="name-label">change name of task:   </label>
             <input type="text" id="name-input" name="name-input"></input>
             </div>
-          <button className='submit-button'>update</button>
+          <button className='submit-button' onClick={updateTask}>update</button>
         </div>
         :""}
      </div>   
