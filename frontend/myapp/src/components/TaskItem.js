@@ -3,6 +3,7 @@ import taskItemCss from '../CSS/taskItem.css';
 import { Link, Outlet } from 'react-router-dom'
 
 const TaskItem = ({taskItem}) => {
+  
   return (
     <div className='task-container'>
       <Link to = "/editTask" state={{task : taskItem}}>edit task</Link>
