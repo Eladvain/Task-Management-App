@@ -1,0 +1,11 @@
+#description-label{
+  text-align: center;
+  color: blue;
+  /* border: 1px solid ; */
+  padding-top: 15px;
+}
+
+.updateDescription{
+  display: flex;
+  /* border: 1px solid green ; */
+}
