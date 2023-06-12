@@ -16,19 +16,6 @@ const EditTask = () => {
   const location = useLocation();
   const {task} = location.state;
 
-  // useEffect(() => {
-  //   async function updateTaskList(){
-  //     console.log("in useEffect of edit task");
-  //     console.log("statusChecked in useEffect = "+statusChecked);
-  //     if(statusChecked === true){
-
-  //     }
-    
-  //   }
-    
-  //   updateTaskList();
-  // },[statusChecked]);
-
 
   const handleChangeStatus = async () => {
     if(statusChecked === false){

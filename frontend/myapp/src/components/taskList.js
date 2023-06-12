@@ -37,11 +37,11 @@ const TaskList = () => {
 
   return (
     <div className='task-list'>
-      {/* <div className='task-list-2'> */}
+      <h1 className='header-all-tasks'>All tasks list</h1>
       {taskList.map((task,key) =>{
         return <TaskItem taskItem = {task}/>
       })}
-      {/* </div> */}
+      
     </div>
   )
   }

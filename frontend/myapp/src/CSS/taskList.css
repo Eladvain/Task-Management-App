@@ -6,9 +6,13 @@
   border:  solid red; */
 }
 
-/* .task-list-2{
-  display: inline;
-  width: 100%;
-  padding: 3px;
-  border:  solid red;
-} */
+h1.header-all-tasks{
+  font-family:SpaceGrotesk-Medium;
+  left : auto;
+  right: auto;
+  text-align: center;
+  text-transform: uppercase;
+  color:brown;
+  font-size: 16px;
+  border:  solid red; 
+}
