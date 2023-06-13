@@ -14,7 +14,7 @@
   border:  solid red; */
 }
 
-.create-task-div{
+/* .create-task-div{
   margin-left: 15px; 
   margin-right: 15px;
   border: 1px solid rgb(94, 20, 163); 
@@ -25,7 +25,7 @@ h1.header-create-task{
   left: auto;
   right: auto;
   text-align: center;
-}
+} */
 
 h1.header-all-tasks{
   font-family:SpaceGrotesk-Medium;

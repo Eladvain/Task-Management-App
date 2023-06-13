@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TaskItem from './TaskItem';
 import taskListCss from '../CSS/taskList.css'
+import CreateTask from './CreateTask';
 
 
 const TaskList = () => {
@@ -42,13 +43,12 @@ const TaskList = () => {
         {taskList.map((task,key) =>{
           return <TaskItem taskItem = {task}/>
         })}
-        </div>
-        <div className='create-task-div'>
-        <h1 className='header-create-task'>create task</h1>
-        </div>
+      </div>
+      <CreateTask/>
+    </div>
         
       
-    </div>
+    
   )
   }
 
