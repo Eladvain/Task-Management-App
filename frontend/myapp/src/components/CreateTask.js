@@ -20,11 +20,44 @@ const CreateTask = () => {
     setEndDate(event.target.value);
     event.preventDefault();
   }
+
+
+  async function createTaskInBackend()
+  {
+    console.log("in button click");
+    if(name === "" || endDate === ""){
+      alert("input is not valid");
+      return;
+    }
+    let response;
+    let taskObject = {
+      "name" : `${name}`,
+      "endDate" : `${endDate}`,
+      "description" : `${description}`
+    }
+
+    console.log("task = "+JSON.stringify(taskObject))
+        try {
+            response = await fetch('http://localhost:2718/tasks/task', {
+                method: 'POST',
+                headers: {
+                    credentials: 'include',
+                    'Content-Type': 'application/json'},
+                body: JSON.stringify(taskObject)
+            });
+        } catch (error){
+            console.log('error');
+        }
+        console.log("after fetch");
+        const parsed_response = await response.json();
+        console.log(parsed_response["msg"]);
+
+  }
   
 
   return (
     <div className='create-task-div'>
-      <h1 className='header-create-task'>create task</h1>
+      <h1 className='header-create-task'>Create Task</h1>
       <div className='updateName'>
         <label id="label" htmlFor="name-label"> Name of task:</label>
         <input type="text" 
@@ -54,6 +87,8 @@ const CreateTask = () => {
                value={endDate}>
         </input>
       </div>  
+
+      <button className='create-task-button' onClick={createTaskInBackend}>Create</button>
        
     </div>
   )

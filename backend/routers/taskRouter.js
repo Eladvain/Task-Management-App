@@ -56,7 +56,7 @@ async function get_task_by_id(req, res)
 
 async function create_new_task(req, res)
 {
-  const {name, endDate, status, description} = req.body;
+  const {name, endDate, description} = req.body;
   console.log("name = "+name+" endDate = "+endDate);
 
   const date = new Date();
@@ -71,11 +71,12 @@ async function create_new_task(req, res)
   let startDate = `${day}/${month}/${year}`;
   console.log("start date = "+startDate)
 
-  const sqlQuery = `INSERT INTO task(name,start_date,end_date,status_task,description) VALUES ("${name}","${startDate}","${endDate}","${status}","${description}");`;
+  const sqlQuery = `INSERT INTO task(name,start_date,end_date,status_task,description) VALUES ("${name}","${startDate}","${endDate}","In process","${description}");`;
   connection.query(sqlQuery, function(err, result) {
     if(err){
       throw err.message;
     }
+    console.log("in connection query")
     res.send({msg : "data inserted to database"});
   })
 

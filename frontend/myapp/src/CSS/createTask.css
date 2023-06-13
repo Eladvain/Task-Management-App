@@ -17,9 +17,9 @@ h1.header-create-task{
 
 #label{
   width : 80px;
-  height: 15px;
+  height: 30px;
   box-sizing: 80px;
-  font-size: 10px;
+  font-size: 13px;
   color: blue;
   margin : 7px;
   align-items: center;
