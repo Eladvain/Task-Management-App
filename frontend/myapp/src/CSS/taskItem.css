@@ -1,6 +1,7 @@
 .task-container{
   border: 1px solid green ;
-  width: 32%;
+  width: 228px;
+  height: 228px;
   float: left;
   transition: transform .2s;
 }

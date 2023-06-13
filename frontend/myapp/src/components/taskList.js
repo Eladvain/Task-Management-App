@@ -36,11 +36,17 @@ const TaskList = () => {
 
 
   return (
-    <div className='task-list'>
-      <h1 className='header-all-tasks'>All tasks list</h1>
-      {taskList.map((task,key) =>{
-        return <TaskItem taskItem = {task}/>
-      })}
+    <div className='main-container'>
+      <div className='task-list'>
+        <h1 className='header-all-tasks'>All tasks list</h1>
+        {taskList.map((task,key) =>{
+          return <TaskItem taskItem = {task}/>
+        })}
+        </div>
+        <div className='create-task-div'>
+        <h1 className='header-create-task'>create task</h1>
+        </div>
+        
       
     </div>
   )
