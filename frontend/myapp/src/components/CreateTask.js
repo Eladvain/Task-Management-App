@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import createTask from '../CSS/createTask.css'
 
-const CreateTask = ({tasks, setTaskList}) => {
+const CreateTask = () => {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -87,8 +87,9 @@ const CreateTask = ({tasks, setTaskList}) => {
                value={endDate}>
         </input>
       </div>  
-
-      <button className='create-task-button' onClick={createTaskInBackend}>Create</button>
+      <div className='div-button'>
+        <button className='create-task-button' onClick={createTaskInBackend}>Create</button>
+      </div>
        
     </div>
   )

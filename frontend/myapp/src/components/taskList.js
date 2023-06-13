@@ -49,7 +49,7 @@ const TaskList = () => {
           return <TaskItem taskItem = {task}/>
         })}
       </div>
-      <CreateTask tasks={taskList} setTasks={setTaskList}/>
+      <CreateTask/>
     </div>
         
       
