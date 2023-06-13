@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import createTask from '../CSS/createTask.css'
 
-const CreateTask = () => {
+const CreateTask = ({tasks, setTaskList}) => {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -51,7 +51,7 @@ const CreateTask = () => {
         console.log("after fetch");
         const parsed_response = await response.json();
         console.log(parsed_response["msg"]);
-
+        alert("task inserted");
   }
   
 
