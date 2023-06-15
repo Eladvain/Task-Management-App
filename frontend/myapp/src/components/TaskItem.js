@@ -39,8 +39,10 @@ const TaskItem = ({taskItem}) => {
       <label>end date : {taskItem.end_date}</label>
       <br/>
       <label>status : {taskItem.status_task}</label>
-      <br/>
-      <button className='delete-button' onClick={deleteTaskFromList}>Delete</button>
+      <br/><br/>
+      <div className='div-button'>
+      <button className='delete-button' onClick={deleteTaskFromList}>Delete</button> 
+      </div>
     </div>
   )
 }
