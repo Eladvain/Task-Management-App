@@ -2,7 +2,30 @@ import React from 'react';
 import taskItemCss from '../CSS/taskItem.css';
 import { Link, Outlet } from 'react-router-dom'
 
+
+
 const TaskItem = ({taskItem}) => {
+
+  async function deleteTaskFromList()
+{
+  let response;
+        try {
+            response = await fetch(`http://localhost:2718/tasks/task/${taskItem.id}`, {
+                method: 'DELETE',
+                headers: {
+                    credentials: 'include',
+                    'Content-Type': 'application/json'}
+                
+            });
+        } catch (error){
+            console.log('error');
+        }
+        console.log("after fetch");
+        const parsed_response = await response.json();
+        console.log(parsed_response["msg"]);
+        // alert("task deleted");
+
+}
   
   return (
     <div className='task-container'>
@@ -16,6 +39,8 @@ const TaskItem = ({taskItem}) => {
       <label>end date : {taskItem.end_date}</label>
       <br/>
       <label>status : {taskItem.status_task}</label>
+      <br/>
+      <button className='delete-button' onClick={deleteTaskFromList}>Delete</button>
     </div>
   )
 }

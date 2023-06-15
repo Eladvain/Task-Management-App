@@ -95,6 +95,19 @@ async function update_task(req, res)
   })
 }
 
+async function delete_task(req, res)
+{
+  const id = parseInt(req.params.id);
+  // console.log("id = "+id+", field = "+field+", value = "+value);
+  const sqlQuery = `Delete From task Where id=${id};`;
+  connection.query(sqlQuery, function(err, result) {
+    if(err){
+      throw err.message;
+    }
+    res.send({msg : "Delete from database"});
+  })
+}
+
 router.get('/task',  (req, res) => { list_all_tasks(req, res) });
 router.get('/task/(:id)',  (req, res) => { get_task_by_id(req, res) });
 router.get('/byStatusInProcess',  (req, res) => { get_task_by_status_done(req, res) });
@@ -102,6 +115,8 @@ router.get('/byStatusInProcess',  (req, res) => { get_task_by_status_done(req, r
 router.post('/task',  (req, res) => { create_new_task(req, res) });
 
 router.put('/task',  (req, res) => { update_task(req, res) });
+
+router.delete('/task/(:id)',  (req, res) => { delete_task(req, res) });
 
 
 router.use( set_content_type );
