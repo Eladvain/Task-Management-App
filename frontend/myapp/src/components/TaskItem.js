@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 
 
 
-const TaskItem = ({taskItem}) => {
+const TaskItem = ({taskItem, buttonDel}) => {
 
   async function deleteTaskFromList()
 {
@@ -40,9 +40,12 @@ const TaskItem = ({taskItem}) => {
       <br/>
       <label>status : {taskItem.status_task}</label>
       <br/><br/>
-      <div className='div-button'>
-      <button className='delete-button' onClick={deleteTaskFromList}>Delete</button> 
-      </div>
+      {buttonDel === true ? 
+        <div className='div-button'>
+        <button className='delete-button' onClick={deleteTaskFromList}>Delete</button> 
+        </div> : ""
+      }
+      
     </div>
   )
 }

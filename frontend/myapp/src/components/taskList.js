@@ -46,7 +46,7 @@ const TaskList = () => {
       <div className='task-list'>
         <h1 className='header-all-tasks'>All tasks list</h1>
         {taskList.map((task,key) =>{
-          return <TaskItem taskItem = {task}/>
+          return <TaskItem taskItem = {task} buttonDel = {true}/>
         })}
       </div>
       <CreateTask/>

@@ -104,7 +104,7 @@ const EditTask = () => {
   return (
     <div className='div-container'>
       <div className='task-div'>
-      <TaskItem  taskItem={task}/>
+      <TaskItem  taskItem={task} buttonDel = {false}/>
       </div>
       <div className='task-update'> 
         <h1 className='choose-update'>choose which field to update</h1>
