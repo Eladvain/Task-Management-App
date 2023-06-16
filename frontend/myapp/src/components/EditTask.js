@@ -39,10 +39,10 @@ const EditTask = () => {
     setNameChecked(!nameChecked);
   };
 
-  async function updateTask()
+  async function createBodyToFetch()
   {
     let updateObject = "";
-    let response;
+     
     console.log("in update task");
     if(statusChecked === true && statusOption === "") return;
     if(descChecked === true){
@@ -66,6 +66,15 @@ const EditTask = () => {
         "value" : `${statusOption}`
       }
     }
+    return updateObject;
+  }
+
+  
+
+  async function updateTask()
+  {
+    let updateObject = await createBodyToFetch();
+    let response;
 
       try {
         response = await fetch(`http://localhost:2718/tasks/task`, {

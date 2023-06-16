@@ -21,9 +21,36 @@ const CreateTask = () => {
     event.preventDefault();
   }
 
+  async function checkIfInputCorrect()
+  {
+    let msg_input_not_correct = [];
+
+    if(endDate.length > 0)
+    {
+      console.log("inside")
+      let letter;
+      for(let i = 0; i < endDate.length; i++)
+      {
+        letter = endDate[i];
+        if((letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z')){
+          msg_input_not_correct.push("Date cannot consist of letters. Only numbers and / sign.")
+          return msg_input_not_correct;
+        }
+      }
+    }
+      
+  }
+
 
   async function createTaskInBackend()
   {
+    let checkList = [];
+    checkList = await checkIfInputCorrect();
+    if(checkList.length > 0)
+    {
+      alert(checkList[0]);
+      return;
+    }
     console.log("in button click");
     if(name === "" || endDate === ""){
       alert("input is not valid");
