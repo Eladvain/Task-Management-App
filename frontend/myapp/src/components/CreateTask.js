@@ -37,6 +37,23 @@ const CreateTask = () => {
           return msg_input_not_correct;
         }
       }
+
+      const date = new Date();
+      let year = date.getFullYear();
+
+      let splitEndDate = [];
+      splitEndDate = endDate.split('/');
+      if(splitEndDate.length === 3)
+      {
+        if(splitEndDate[2] < year){
+          msg_input_not_correct.push(`year must be at least ${year}`)
+        }
+      }
+      else{
+        msg_input_not_correct.push("Date format is incorrect");
+      }
+
+      return msg_input_not_correct;
     }
       
   }
