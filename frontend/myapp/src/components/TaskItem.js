@@ -8,7 +8,11 @@ const TaskItem = ({taskItem, buttonDel}) => {
 
   async function deleteTaskFromList()
 {
-  let response;
+  let text = "Are you sure you want to remove this task ? ";
+  let answer = window.confirm(text);
+  if(answer === true)
+  {
+    let response;
         try {
             response = await fetch(`http://localhost:2718/tasks/task/${taskItem.id}`, {
                 method: 'DELETE',
@@ -23,7 +27,9 @@ const TaskItem = ({taskItem, buttonDel}) => {
         console.log("after fetch");
         const parsed_response = await response.json();
         console.log(parsed_response["msg"]);
-        // alert("task deleted");
+        alert("task removed");
+  
+  }
 
 }
   
