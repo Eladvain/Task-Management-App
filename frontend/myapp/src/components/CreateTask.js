@@ -40,13 +40,16 @@ const CreateTask = () => {
 
       const date = new Date();
       let year = date.getFullYear();
+      let yearInString = year.toString();
+      // console.log("type = "+typeof year);
 
       let splitEndDate = [];
       splitEndDate = endDate.split('/');
       if(splitEndDate.length === 3)
       {
-        if(splitEndDate[2] < year){
-          msg_input_not_correct.push(`year must be at least ${year}`)
+        let yearWithoutPre = yearInString[2] + yearInString[3];
+        if(splitEndDate[2] < yearWithoutPre){
+          msg_input_not_correct.push(`year must be at least ${yearWithoutPre} - ${yearInString}`)
         }
       }
       else{
