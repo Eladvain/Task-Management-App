@@ -50,7 +50,18 @@ async function get_task_by_id(req, res)
       if(err){
         throw err;
       }
-      res.send({"tasks by in process" : result});
+      res.send({"tasks" : result});
+  })
+  }
+  async function get_task_by_status_inProcess(req, res)
+  {
+    console.log("heree inn");
+    const sqlQuery = `Select * From task Where status_task = "In Process";`;
+    connection.query(sqlQuery, function(err, result) {
+      if(err){
+        throw err;
+      }
+      res.send({"tasks" : result});
   })
   }
 
@@ -110,7 +121,8 @@ async function delete_task(req, res)
 
 router.get('/task',  (req, res) => { list_all_tasks(req, res) });
 router.get('/task/(:id)',  (req, res) => { get_task_by_id(req, res) });
-router.get('/byStatusInProcess',  (req, res) => { get_task_by_status_done(req, res) });
+router.get('/byStatusDone',  (req, res) => { get_task_by_status_done(req, res) });
+router.get('/byStatusInProcess',  (req, res) => { get_task_by_status_inProcess(req, res) });
 
 router.post('/task',  (req, res) => { create_new_task(req, res) });
 
