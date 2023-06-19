@@ -10,44 +10,62 @@ const TaskList = () => {
   const [taskList, setTaskList] = useState([]);
   const [listByStatus, setListByStatus] = useState(false);
 
+  // useEffect(()=>{
+  //   console.log("in useEffect of list by statusss!!!!");
+  //   console.log("innn-->>>"+listByStatus);
+  // }, [listByStatus])
+
+  async function updateTaskList(){
+    let response;
+    // console.log("inside");
+    try {
+      response = await fetch("http://localhost:2718/tasks/task", {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              credentials: 'include',
+              'Access-Control-Allow-Origin': '*'
+          }
+      });
+  } catch (error) {
+      console.log('error = ' + error);
+  }
+  const tasks_res = await response.json();
+  const task_list = tasks_res["tasks"];
+  console.log("task_list in useEffect = "+JSON.stringify(task_list));
+  setTaskList([...task_list]);
+  // console.log("books = "+books)
+  // await printBooksToConsole(books);
+  }
+
+
   useEffect(() => {
-    const timer = setInterval(()=>{
 
-      async function updateTaskList(){
-        let response;
-        // console.log("inside");
-        if(listByStatus === false)
-        {
-          try {
-            response = await fetch("http://localhost:2718/tasks/task", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    credentials: 'include',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            });
-        } catch (error) {
-            console.log('error = ' + error);
-        }
-        const tasks_res = await response.json();
-        const task_list = tasks_res["tasks"];
-        console.log("task_list in useEffect = "+JSON.stringify(task_list));
-        setTaskList([...task_list]);
-        }
-        
-      // console.log("books = "+books)
-      // await printBooksToConsole(books);
-      }
-
-      console.log("in useEffect --> listByStatus = "+listByStatus);
-
-        updateTaskList();
-      
-
-    },1000)
+    async function doIfIsTrue()
+  {
     
-  },[]);
+    console.log("listByStatus-->"+listByStatus )
+
+    console.log("in useEffect of list by status");
+    let timer;
+    if(listByStatus === true){
+      console.log("in clear interval");
+      clearTimeout(timer);
+    }
+    else if(listByStatus === false)
+    {
+         timer = setTimeout(async ()=>{
+          await updateTaskList(); 
+          console.log("in useEffect --> listByStatus = "+listByStatus)
+        
+         },1000)
+    }
+}
+      
+   doIfIsTrue();
+    
+  },[listByStatus]);
+
 
 
   return (
@@ -62,7 +80,7 @@ const TaskList = () => {
           return <TaskItem taskItem = {task} buttonDel = {true}/>
         })}
       </div>
-      <CreateTask/>
+      <CreateTask setByStatus = {setListByStatus}/>
     </div>
         
       

@@ -45,7 +45,7 @@ async function get_task_by_id(req, res)
   async function get_task_by_status_done(req, res)
   {
     console.log("heree inn");
-    const sqlQuery = `Select * From task Where status_task = "done";`;
+    const sqlQuery = `Select * From task Where status_task = "Done";`;
     connection.query(sqlQuery, function(err, result) {
       if(err){
         throw err;

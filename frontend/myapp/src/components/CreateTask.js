@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import createTask from '../CSS/createTask.css'
 
-const CreateTask = () => {
+const CreateTask = ({setByStatus}) => {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -99,6 +99,7 @@ const CreateTask = () => {
         const parsed_response = await response.json();
         console.log(parsed_response["msg"]);
         alert("task inserted");
+        setByStatus(false);
   }
   
 

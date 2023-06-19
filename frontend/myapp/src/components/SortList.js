@@ -5,22 +5,25 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskOfList}) 
     const [statusOption, setStatusOption] = ("");
 
 
-  const changeBySort = (event)=>{
+  const changeBySort = async (event)=>{
+    event.preventDefault();
     console.log("what selected = "+event.target.value)
     // setStatusOption(event.target.value);
     if(event.target.value === ""){
+      console.log("in if optionnn");
       setSortedByStatus(false);
     }
     else if(event.target.value === "Status")
     {
+      console.log("inside else if option");
       setSortedByStatus(true);
     }
-    event.preventDefault();
+    
   }
 
   const changeStatus = async (event)=>{
-    // console.log("status = "+event.target.value)
-    // setStatusOption(event.target.value);
+ 
+    console.log("in change status sortByStatus = "+sortByStatus);
     let response;
     if(event.target.value === "In Process"){
       try {
@@ -36,9 +39,24 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskOfList}) 
         console.log('error = ' + error);
     }
     }
-    else{
+    else if(event.target.value === "Done"){
+      console.log("in Done option");
       try {
         response = await fetch("http://localhost:2718/tasks/byStatusDone", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                credentials: 'include',
+                'Access-Control-Allow-Origin': '*'
+            }
+        });
+    } catch (error) {
+        console.log('error = ' + error);
+    }
+    }
+    else{
+      try {
+        response = await fetch("http://localhost:2718/tasks/task", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +72,7 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskOfList}) 
       const tasks_res = await response.json();
       const task_list = tasks_res["tasks"];
       console.log("task_list in sorted = "+JSON.stringify(task_list));
-      setTaskOfList([task_list]);
+      setTaskOfList([...task_list]);
       console.log("sortByStatus = "+sortByStatus);
     event.preventDefault();
   }
