@@ -90,7 +90,8 @@ const TaskList = () => {
         <SortList sortByStatus = {listByStatus} 
                   setSortedByStatus = {setListByStatus} 
                   taskOfList = {taskList}
-                  setTaskList = {setTaskList}  />
+                  setTaskList = {setTaskList}
+                  updateTask = {updateTaskList}  />
         {taskList.map((task,key) =>{
           return <TaskItem taskItem = {task} buttonDel = {true} setByStatus = {setListByStatus} updateTask = {updateTaskList}/>
         })}

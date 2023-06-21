@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList}) => {
+const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, updateTask}) => {
 
     const [statusOption, setStatusOption] = ("");
 
@@ -12,6 +12,7 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList}) =>
     if(event.target.value === ""){
       console.log("in if optionnn");
       setSortedByStatus(false);
+      updateTask();
       // changeStatus("");
     }
     else if(event.target.value === "Status")
