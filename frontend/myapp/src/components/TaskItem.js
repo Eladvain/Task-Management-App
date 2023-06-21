@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 
 
 
-const TaskItem = ({taskItem, buttonDel}) => {
+const TaskItem = ({taskItem, buttonDel, setByStatus, updateTask}) => {
 
   async function deleteTaskFromList()
 {
@@ -28,10 +28,13 @@ const TaskItem = ({taskItem, buttonDel}) => {
         const parsed_response = await response.json();
         console.log(parsed_response["msg"]);
         alert("task removed");
+        await updateTask();
   
   }
 
 }
+
+
   
   return (
     <div className='task-container'>

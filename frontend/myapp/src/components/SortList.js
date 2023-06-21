@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskOfList}) => {
+const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList}) => {
 
     const [statusOption, setStatusOption] = ("");
 
@@ -12,6 +12,7 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskOfList}) 
     if(event.target.value === ""){
       console.log("in if optionnn");
       setSortedByStatus(false);
+      // changeStatus("");
     }
     else if(event.target.value === "Status")
     {
@@ -72,7 +73,7 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskOfList}) 
       const tasks_res = await response.json();
       const task_list = tasks_res["tasks"];
       console.log("task_list in sorted = "+JSON.stringify(task_list));
-      setTaskOfList([...task_list]);
+      setTaskList([...task_list]);
       console.log("sortByStatus = "+sortByStatus);
     event.preventDefault();
   }

@@ -38,34 +38,49 @@ const TaskList = () => {
   // await printBooksToConsole(books);
   }
 
+  useEffect(()=>{
+    updateTaskList();
+  },[])
 
-  useEffect(() => {
+//   useEffect(() => {
+   
+//     console.log("in useEffect of listByStatus = "+listByStatus);
+//     if(listByStatus === false){
+//       updateTaskList();
+//     }
+    
+  
+// },[setListByStatus]);
 
-    async function doIfIsTrue()
+
+  // useEffect(async () => {
+  //  console.log("in useEffect of setTaskList");
+  //    await updateTaskList();
+    
+  // },[setTaskList]);
+
+  async function doIfIsTrue()
   {
-    
-    console.log("listByStatus-->"+listByStatus )
-
-    console.log("in useEffect of list by status");
-    let timer;
-    if(listByStatus === true){
-      console.log("in clear interval");
-      clearTimeout(timer);
-    }
-    else if(listByStatus === false)
-    {
-         timer = setTimeout(async ()=>{
-          await updateTaskList(); 
-          console.log("in useEffect --> listByStatus = "+listByStatus)
-        
-         },1000)
-    }
-}
+    await updateTaskList();
+    // if(listByStatus === false)
+    // {
+    //   timer = setInterval(async ()=>{
+    //   updateTaskList(); 
+    //   console.log("in useEffect --> listByStatus = "+listByStatus);
+    //   // clearInterval(timer);
+    //   // if(listByStatus === true){
+    //   //   clearInterval(timer);
+    //   // }
+    //   },1000)
       
-   doIfIsTrue();
+    // }
+    // else if(listByStatus === true){
+    //   console.log("in else if listByStatus = true");
+    //   clearInterval(timer);
+    // }
     
-  },[listByStatus]);
-
+    
+  }
 
 
   return (
@@ -75,12 +90,12 @@ const TaskList = () => {
         <SortList sortByStatus = {listByStatus} 
                   setSortedByStatus = {setListByStatus} 
                   taskOfList = {taskList}
-                  setTaskOfList = {setTaskList}  />
+                  setTaskList = {setTaskList}  />
         {taskList.map((task,key) =>{
-          return <TaskItem taskItem = {task} buttonDel = {true}/>
+          return <TaskItem taskItem = {task} buttonDel = {true} setByStatus = {setListByStatus} updateTask = {updateTaskList}/>
         })}
       </div>
-      <CreateTask setByStatus = {setListByStatus}/>
+      <CreateTask updateTask = {updateTaskList}/>
     </div>
         
       
