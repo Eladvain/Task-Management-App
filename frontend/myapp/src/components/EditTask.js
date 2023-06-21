@@ -91,7 +91,7 @@ const EditTask = () => {
     console.log("response = "+response);
     const update_res = await response.json();
     const update_msg = update_res["msg"];
-    console.log("update_msg = "+update_msg);
+    alert(update_msg);
     
   }
 

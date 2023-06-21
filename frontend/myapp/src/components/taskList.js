@@ -34,8 +34,7 @@ const TaskList = () => {
   const task_list = tasks_res["tasks"];
   console.log("task_list in useEffect = "+JSON.stringify(task_list));
   setTaskList([...task_list]);
-  // console.log("books = "+books)
-  // await printBooksToConsole(books);
+
   }
 
   useEffect(()=>{
