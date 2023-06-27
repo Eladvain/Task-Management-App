@@ -1,5 +1,6 @@
 import React from 'react'
 import logIn from '../CSS/logIn.css'
+import { Link, Outlet } from 'react-router-dom'
 
 const LogIn = () => {
   return (
@@ -24,6 +25,15 @@ const LogIn = () => {
                    type="text"
                    placeholder='Password'/>
 
+          </div>
+          <div className='button-input-div'>
+            {/* <span className='name-span'>Password : </span> */}
+            <button className='button-login'>LogIn</button>
+          </div>
+          <div className='newAccount-input-div'>
+            {/* <span className='name-span'>Password : </span> */}
+            <Link to = "/newAcount" state={{}}>Don't have an account yet?</Link>
+            <Outlet/>
           </div>
           </div>
         </form>
