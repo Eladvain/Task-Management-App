@@ -1,0 +1,23 @@
+.wrap-log-in{
+  display: flex;
+  
+}
+.log-in-pic{
+  padding: 20px;
+  border : 1px green solid;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.img-login{
+  border : 1px green solid;
+  position: absolute;
+  top: 30%;
+ 
+  height: 200px;
+  width: 200px;
+
+}
