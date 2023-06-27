@@ -21,3 +21,74 @@
   width: 200px;
 
 }
+.div-form{
+  border: 1px blueviolet solid;
+  /* position: absolute; */
+  /* top: 30%; */
+}
+.form-log-in{
+  border: 1px red solid;
+  width: 500px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.span-loging{
+  height: 50px;
+  border: 1px black solid;
+  position: absolute;
+  top: 20%;
+  font-family: Poppins-Bold;
+    font-size: 35px;
+    color: #333;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    display: block;
+    /* margin-top: 10px; */
+    /* padding-bottom: 54px; */
+    /* padding-top: 100px; */
+}
+
+.name-input-div{
+  height: 35px;
+  position: absolute;
+  top: 33%;
+  width: 100%;
+  /* border: 1px brown solid; */
+}
+.password-input-div{
+  position: absolute;
+  height: 35px;
+  top: 42%;
+  width: 100%;
+  /* border: 1px brown solid; */
+}
+
+/* .name-span{
+  margin: 5px;
+  width: 100px;
+  font-size: 14px;
+  text-align: center;
+}
+.password-span{
+  margin: 5px;
+  font-size: 14px;
+  width: 100px;
+  text-align: center;
+} */
+.password-input{
+  margin-left : 40px;
+  height: 30px;
+  width: 300px;
+  border-radius: 30px;
+  opacity: 0.5;
+}
+.name-input{
+  margin-left : 40px;
+  height: 30px;
+  width: 300px;
+  border-radius: 30px;
+  opacity: 0.5;
+}
