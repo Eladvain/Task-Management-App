@@ -1,7 +1,8 @@
 .wrap-log-in{
   display: flex;
-  
+  /* position: relative; */
 }
+
 .log-in-pic{
   padding: 20px;
   border : 1px green solid;

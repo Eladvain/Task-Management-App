@@ -1,0 +1,92 @@
+.div-container{
+  border: 1px red groove;
+  /* height: 500px;
+  width: 500px; */
+  position: relative;
+  justify-content: center;
+  display: flex;
+}
+.newAcount-div{
+  border: 1px blue groove;
+  height: 450px;
+  width: 400px;
+  position: absolute;
+  /* left: 20%; */
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.newAcount-form{
+  border: 1px red solid;
+  height: 100%;
+  /* width: 500px; */
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+.newAcount-span{
+  height: 50px;
+  border: 1px black solid;
+  position: absolute;
+  top: 10%;
+  font-family: Poppins-Bold;
+    font-size: 35px;
+    color: #333;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+.new-name-div{
+  /* align-items: center; */
+  width: 100%;
+  /* border: 1px brown solid; */
+  height: 35px;
+  top: 30%;
+  position: absolute;
+}
+.new-name-input{
+
+  margin: auto;
+  display: block;
+  width: 50%;
+  /* border: 1px brown solid; */
+  border-radius: 25px;
+  height: 30px;
+  opacity: 0.6;
+  background: khaki;
+}
+.new-password-div{
+  /* align-items: center; */
+  width: 100%;
+  /* border: 1px brown solid; */
+  height: 35px;
+  top: 40%;
+  position: absolute;
+}
+.new-password-input{
+
+  margin: auto;
+  display: block;
+  width: 50%;
+  /* border: 1px brown solid; */
+  border-radius: 25px;
+  height: 30px;
+  opacity: 0.6;
+  background: khaki;
+}
+.button-signin-div{
+  width: 100%;
+  height: 35px;
+  top: 60%;
+  position: absolute;
+}
+.button-signin{
+  margin: auto;
+  display: block;
+  width: 50%;
+  /* border: 1px brown solid; */
+  border-radius: 25px;
+  height: 30px;
+  opacity: 0.6;
+  background: rgb(50, 245, 50);
+}
