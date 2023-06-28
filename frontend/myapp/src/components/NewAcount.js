@@ -7,14 +7,43 @@ const NewAcount = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  async function checkIfInputValid()
+  {
+      let response;
+    console.log("inside check");
+      try {
+      response = await fetch('http://localhost:2718/auth/usersName', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              credentials: 'include',
+              'Access-Control-Allow-Origin': '*'
+          }
+      });
+  } catch (error) {
+      console.log('error = ' + error);
+  }
+  const users_res = await response.json();
+  const users_list = users_res["users"];
+  console.log("users_name_list = "+JSON.stringify(users_list));
+  
+  let list = await users_list.find((user)=> name === user.name);
+  
+  if(typeof list === 'undefined') return true; else return false;
+  }
+
+  
+
   const handleSubmit = async (event) => {
     let response;
         event.preventDefault();
 
-        const new_user = {
+        if(await checkIfInputValid())
+        {
+          const new_user = {
             "name": `${name}` ,
             "password": `${password}`
-        }
+          }
         console.log("in handle submit");
         try {
             response = await fetch('http://localhost:2718/auth/signin', {
@@ -28,20 +57,16 @@ const NewAcount = () => {
             console.log("the error is:", e.name)
         }
              const parsed_response = await response.json();
-             console.log(parsed_response["msg"]);
+             alert(parsed_response["msg"]);
              console.log("move to login page");
-        // const status = response.status;
-        // console.log("parsed_response status------------", status);
+             window.location.href = "/"
+        
+        }
+        else{
+          alert("name allready exist");
+        }
 
-        // if (status !== 200) {
-        //     const parsed_response = await response.json();
-        //     console.log("error");
-        // }else
-        // {
-        //     console.log("move to login page");
-        //     window.location.href = '/login.html' 
-        // }
-  }
+      }  
 
   return (
     <div className='div-container'>
@@ -73,6 +98,6 @@ const NewAcount = () => {
       </div>
     </div>
   )
-}
 
+}
 export default NewAcount
