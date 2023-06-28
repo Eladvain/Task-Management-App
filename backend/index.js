@@ -8,6 +8,7 @@ const mySqlConnection = require('./config/db')
 const  port = 2718;
 
 const taskRoute = require("./routers/taskRouter");
+const authRoute = require("./routers/authRouter");
 // const authorRoute = require("./backend/router/author");
 
 // const utills = require("./utills");
@@ -35,7 +36,7 @@ function content_type_from_extension( url)
 const set_content_type = function (req, res, next) 
 {
 	const content_type = 
-	(req.baseUrl == '/task' || req.baseUrl == '/author' ) ? 
+	(req.baseUrl == '/task' || req.baseUrl == '/auth' ) ? 
 	"application/json; charset=utf-8" : 
 	content_type_from_extension( req.url)
 	res.setHeader("Content-Type", content_type);
@@ -52,6 +53,7 @@ app.use(express.urlencoded( // to support URL-encoded bodies
 app.use(cors());
 
  app.use("/tasks", taskRoute);
+ app.use("/auth", authRoute);
 // app.use("/author", authorRoute);
 
 app.use(express.static(path.join(__dirname, 'front'))); 

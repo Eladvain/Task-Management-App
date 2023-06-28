@@ -7,9 +7,40 @@ const NewAcount = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(`The name you entered was: ${name}`)
+  const handleSubmit = async (event) => {
+    let response;
+        event.preventDefault();
+
+        const new_user = {
+            "name": `${name}` ,
+            "password": `${password}`
+        }
+        console.log("in handle submit");
+        try {
+            response = await fetch('http://localhost:2718/auth/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(new_user)
+            })
+        } catch (e) {
+            console.log("the error is:", e.name)
+        }
+             const parsed_response = await response.json();
+             console.log(parsed_response["msg"]);
+             console.log("move to login page");
+        // const status = response.status;
+        // console.log("parsed_response status------------", status);
+
+        // if (status !== 200) {
+        //     const parsed_response = await response.json();
+        //     console.log("error");
+        // }else
+        // {
+        //     console.log("move to login page");
+        //     window.location.href = '/login.html' 
+        // }
   }
 
   return (
