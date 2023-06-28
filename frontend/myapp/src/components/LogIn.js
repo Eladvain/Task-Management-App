@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logIn from '../CSS/logIn.css'
 import { Link, Outlet } from 'react-router-dom'
 
 const LogIn = () => {
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className='log-in-container'>
       <div className='wrap-log-in'>
@@ -16,14 +20,18 @@ const LogIn = () => {
             {/* <span className='name-span'>Name : </span> */}
             <input className='name-input'
                    type="text"
-                   placeholder='Name'/>
+                   placeholder='Name'
+                   value={name}
+                   onChange={(e) => setName(e.target.value)}/>
 
           </div>
           <div className='password-input-div'>
             {/* <span className='name-span'>Password : </span> */}
             <input className='password-input'
                    type="text"
-                   placeholder='Password'/>
+                   placeholder='Password'
+                   value={password}
+                   onChange={(e) => setPassword(e.target.value)}/>
 
           </div>
           <div className='button-input-div'>
