@@ -37,7 +37,7 @@ const LogIn = () => {
   const handleSubmit = async (event) => {
     let response;
     event.preventDefault();
-    if(! await checkIfInputValid())
+    if(! await checkIfInputValid())  //--- name is exist in database ---
     {
       alert("helloo");
     }
@@ -79,7 +79,7 @@ const LogIn = () => {
                    value= "LogIn" /> 
           </div>
           <div className='newAccount-input-div'>
-            <Link to = "/newAcount" state={{ checkFunc : checkIfInputValid}}>Don't have an account yet?</Link>
+            <Link to = "/newAcount" state={{ }}>Don't have an account yet?</Link>
             <Outlet/>
           </div>
           </div>
