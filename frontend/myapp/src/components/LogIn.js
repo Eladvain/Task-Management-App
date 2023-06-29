@@ -28,6 +28,7 @@ const LogIn = () => {
   console.log("users_name_list = "+JSON.stringify(users_list));
   
   let list = await users_list.find((user)=> name === user.name);
+  console.log(JSON.stringify(list));
   
   if(typeof list === 'undefined') return true; else return false;
   }
@@ -36,9 +37,12 @@ const LogIn = () => {
   const handleSubmit = async (event) => {
     let response;
     event.preventDefault();
-    if(!checkIfInputValid)
+    if(! await checkIfInputValid())
     {
-
+      alert("helloo");
+    }
+    else{
+      alert("User doesn't exist");
     }
   }
 
@@ -75,7 +79,7 @@ const LogIn = () => {
                    value= "LogIn" /> 
           </div>
           <div className='newAccount-input-div'>
-            <Link to = "/newAcount" state={{}}>Don't have an account yet?</Link>
+            <Link to = "/newAcount" state={{ checkFunc : checkIfInputValid}}>Don't have an account yet?</Link>
             <Outlet/>
           </div>
           </div>
