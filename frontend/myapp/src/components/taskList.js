@@ -17,7 +17,7 @@ const TaskList = () => {
 
   async function updateTaskList(){
     let response;
-    // console.log("inside");
+    console.log("inside updateTaskList function");
     try {
       response = await fetch("http://localhost:2718/tasks/task", {
           method: 'GET',

@@ -74,8 +74,10 @@ async function log_in(req, res)
           {
             console.log("the same password");
             const token = jwt.sign({ name }, "secret", { expiresIn: "1d" });
-			      const token_string = "access_token=" + token;
-            res.setHeader('Set-Cookie', token_string +"; path=/") // create a cookie in the browser
+			      const token_string = `access_token=${token}`;
+            console.log("token string = "+token_string);
+            await res.setHeader('Set-Cookie', token_string +"; path=/") // create a cookie in the browser
+            // console.log("cookie = "+res.headers.cookie);
 			      res.send({token:token,
 			          msg:"You sign in"});
           }
@@ -95,7 +97,11 @@ async function log_in(req, res)
   async function authenticate_token(req, res, next)
 {
   console.log("in authontication token");
-	const cookieHeader_pair = (req.headers.cookie?.split("="));
+  // console.log("req ="+req.getHeader("Set-Cookie") );
+  console.log("cookie = "+req.headers.cookie);
+	const cookieHeader_pair = (req.headers.cookie["access_token"]?.split("="));
+	// const cookieHeader_pair = (document.cookie["access_token"]?.split("="));
+  console.log("cookie header = "+cookieHeader_pair);
 	if (typeof cookieHeader_pair !== 'undefined' && cookieHeader_pair[0] !== 'access_token' || typeof cookieHeader_pair === 'undefined') {
 		res.status(StatusCodes.FORBIDDEN);
 		res.send({ msg: "please login" });
