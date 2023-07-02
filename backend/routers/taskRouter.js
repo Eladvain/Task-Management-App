@@ -2,6 +2,7 @@ const router = require('express').Router();
 const StatusCodes = require('http-status-codes').StatusCodes;
 const package = require('pkg.json');
 const connection = require('../config/db');
+const auth = require('../routers/authRouter');
 
 
 const set_content_type = function (req, res, next) 
@@ -119,16 +120,16 @@ async function delete_task(req, res)
   })
 }
 
-router.get('/task',  (req, res) => { list_all_tasks(req, res) });
-router.get('/task/(:id)',  (req, res) => { get_task_by_id(req, res) });
-router.get('/byStatusDone',  (req, res) => { get_task_by_status_done(req, res) });
-router.get('/byStatusInProcess',  (req, res) => { get_task_by_status_inProcess(req, res) });
+router.get('/task', auth.authenticate_token,  (req, res) => { list_all_tasks(req, res) });
+router.get('/task/(:id)', auth.authenticate_token,  (req, res) => { get_task_by_id(req, res) });
+router.get('/byStatusDone', auth.authenticate_token,  (req, res) => { get_task_by_status_done(req, res) });
+router.get('/byStatusInProcess', auth.authenticate_token,  (req, res) => { get_task_by_status_inProcess(req, res) });
 
-router.post('/task',  (req, res) => { create_new_task(req, res) });
+router.post('/task', auth.authenticate_token, (req, res) => { create_new_task(req, res) });
 
-router.put('/task',  (req, res) => { update_task(req, res) });
+router.put('/task', auth.authenticate_token, (req, res) => { update_task(req, res) });
 
-router.delete('/task/(:id)',  (req, res) => { delete_task(req, res) });
+router.delete('/task/(:id)', auth.authenticate_token, (req, res) => { delete_task(req, res) });
 
 
 router.use( set_content_type );

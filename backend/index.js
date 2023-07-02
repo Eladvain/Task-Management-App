@@ -53,7 +53,7 @@ app.use(express.urlencoded( // to support URL-encoded bodies
 app.use(cors());
 
  app.use("/tasks", taskRoute);
- app.use("/auth", authRoute);
+ app.use("/auth", authRoute.router);
 // app.use("/author", authorRoute);
 
 app.use(express.static(path.join(__dirname, 'front'))); 

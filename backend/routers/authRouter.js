@@ -3,6 +3,7 @@ const StatusCodes = require('http-status-codes').StatusCodes;
 const package = require('pkg.json');
 const connection = require('../config/db');
 const bcrpyt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 const set_content_type = function (req, res, next) 
 {
@@ -72,15 +73,69 @@ async function log_in(req, res)
           if(resp === true)
           {
             console.log("the same password");
+            const token = jwt.sign({ name }, "secret", { expiresIn: "1d" });
+			      const token_string = "access_token=" + token;
+            res.setHeader('Set-Cookie', token_string +"; path=/") // create a cookie in the browser
+			      res.send({token:token,
+			          msg:"You sign in"});
           }
           else{
             console.log("password not correct");
+            res.status(StatusCodes.FORBIDDEN);
+				    res.send({ msg: "Error password is not valid" });
+				    return;
           }
         }catch(e){
           console.log(e.message);
+          res.status( StatusCodes.BAD_REQUEST );
         }
-  res.send({users : result});
   })
+}
+
+  async function authenticate_token(req, res, next)
+{
+  console.log("in authontication token");
+	const cookieHeader_pair = (req.headers.cookie?.split("="));
+	if (typeof cookieHeader_pair !== 'undefined' && cookieHeader_pair[0] !== 'access_token' || typeof cookieHeader_pair === 'undefined') {
+		res.status(StatusCodes.FORBIDDEN);
+		res.send({ msg: "please login" });
+		return;
+	}
+	const token = cookieHeader_pair[1];
+
+	let user_data_from_jwt;
+	try{	
+		if (typeof token == 'undefined') {
+			res.status(StatusCodes.FORBIDDEN);
+			return res.send({msg:"Invalid token, please try login to get new token"});
+	}
+
+  jwt.verify(token, "secret", async (err, user_name) => {
+    if (err) {
+      res.status(StatusCodes.FORBIDDEN);
+      return res.send(
+        {
+          msg: "invalid token. please log in again!",
+          status_code: StatusCodes.FORBIDDEN,
+          Error_name: err.name
+        });
+    }
+    res.locals.user_name = user_name;
+				
+    if (typeof user_name !== 'undefined') {
+        res.status(StatusCodes.FORBIDDEN);
+      }
+      next();
+      
+  })
+  
+}catch(e){
+  console.log(e.message);
+  res.status(StatusCodes.FORBIDDEN);
+  res.send({msg: err.name, Error: "token invalid"})
+  }
+}
+
   
 
 //   try{
@@ -105,7 +160,7 @@ async function log_in(req, res)
 //    console.log("Error in Auth", err);
 //    res.status( StatusCodes.BAD_REQUEST );
 //  }
-}
+
 
 
 router.post('/signin',  (req, res) => { create_new_user(req, res) });
@@ -114,4 +169,4 @@ router.post('/login',  (req, res) => { log_in(req, res) });
 router.get('/usersName',  (req, res) => { get_all_users_name(req, res) });
 
 router.use( set_content_type );
-module.exports = router;
+module.exports = {router, authenticate_token};
