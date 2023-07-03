@@ -74,9 +74,11 @@ async function log_in(req, res)
           {
             console.log("the same password");
             const token = jwt.sign({ name }, "secret", { expiresIn: "1d" });
+            console.log("typof = "+typeof token);
 			      const token_string = `access_token=${token}`;
-            console.log("token string = "+token_string);
-            await res.setHeader('Set-Cookie', token_string +"; path=/") // create a cookie in the browser
+            // res.cookie('access_token', token);
+            console.log("token_string="+token_string);
+            await res.setHeader('set-cookie', `${token_string}`+"; HttpOnly" ) // create a cookie in the browser
             // console.log("cookie = "+res.headers.cookie);
 			      res.send({token:token,
 			          msg:"You sign in"});

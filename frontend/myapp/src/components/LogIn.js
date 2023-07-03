@@ -39,7 +39,6 @@ const LogIn = () => {
     event.preventDefault();
     if(! await checkIfInputValid())  //--- name is exist in database ---
     {
-      alert("helloo");
       const user = {
         "name" : `${name}`,
         "password":`${password}`
@@ -60,7 +59,7 @@ const LogIn = () => {
         localStorage.setItem("user_name", user.name);
              alert(parsed_response["msg"]);
              console.log("move to home page");
-             window.location.href = "/home"
+            //  window.location.href = "/home"
     } catch (error) {
         console.log('error = ' + error);
     }

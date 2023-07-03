@@ -3,6 +3,7 @@ const app = express()
 const path = require('path');
 const cors = require('cors');
 const mySqlConnection = require('./config/db')
+const cookieParser = require('cookie-parser');
 
 
 const  port = 2718;
@@ -56,7 +57,11 @@ app.use(cors());
  app.use("/auth", authRoute.router);
 // app.use("/author", authorRoute);
 
-app.use(express.static(path.join(__dirname, 'front'))); 
+app.use(express.static(path.join(__dirname, 'frontend'))); 
+app.use(cors({
+	origin : "http://localhost:3000",
+	credentials: true
+}));
 
 //for session cookie
 app.use(function(req, res, next) {
@@ -66,6 +71,8 @@ app.use(function(req, res, next) {
 	  'Access-Control-Allow-Headers',
 	  'Origin, X-Requested-With, Content-Type, Accept'
 	)
+	res.header('access-control-expose-headers: set-cookie')
+	
 	next()
 })
   
