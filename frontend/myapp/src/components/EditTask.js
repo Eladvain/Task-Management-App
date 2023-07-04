@@ -79,6 +79,7 @@ const EditTask = () => {
       try {
         response = await fetch(`http://localhost:2718/tasks/task`, {
             method: 'PUT',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },

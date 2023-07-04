@@ -31,9 +31,9 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, upd
       try {
         response = await fetch("http://localhost:2718/tasks/byStatusInProcess", {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                credentials: 'include',
                 'Access-Control-Allow-Origin': '*'
             }
         });
@@ -46,9 +46,9 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, upd
       try {
         response = await fetch("http://localhost:2718/tasks/byStatusDone", {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                credentials: 'include',
                 'Access-Control-Allow-Origin': '*'
             }
         });
@@ -60,9 +60,9 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, upd
       try {
         response = await fetch("http://localhost:2718/tasks/task", {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                credentials: 'include',
                 'Access-Control-Allow-Origin': '*'
             }
         });

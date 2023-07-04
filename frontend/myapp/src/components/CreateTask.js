@@ -87,8 +87,8 @@ const CreateTask = ({updateTask}) => {
         try {
             response = await fetch('http://localhost:2718/tasks/task', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
-                    credentials: 'include',
                     'Content-Type': 'application/json'},
                 body: JSON.stringify(taskObject)
             });

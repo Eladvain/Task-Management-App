@@ -16,8 +16,8 @@ const TaskItem = ({taskItem, buttonDel, setByStatus, updateTask}) => {
         try {
             response = await fetch(`http://localhost:2718/tasks/task/${taskItem.id}`, {
                 method: 'DELETE',
+                credentials: 'include',
                 headers: {
-                    credentials: 'include',
                     'Content-Type': 'application/json'}
                 
             });

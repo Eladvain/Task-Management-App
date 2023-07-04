@@ -78,7 +78,10 @@ async function log_in(req, res)
 			      const token_string = `access_token=${token}`;
             // res.cookie('access_token', token);
             console.log("token_string="+token_string);
-            await res.setHeader('set-cookie', `${token_string}`+"; HttpOnly" ) // create a cookie in the browser
+            res.cookie("access_token", token, {
+              httpOnly : true
+            }).status(StatusCodes.OK);
+            // res.setHeader('set-cookie', `${token_string}` ) // create a cookie in the browser
             // console.log("cookie = "+res.headers.cookie);
 			      res.send({token:token,
 			          msg:"You sign in"});
@@ -100,17 +103,19 @@ async function log_in(req, res)
 {
   console.log("in authontication token");
   // console.log("req ="+req.getHeader("Set-Cookie") );
-  console.log("cookie = "+req.headers.cookie);
-	const cookieHeader_pair = (req.headers.cookie["access_token"]?.split("="));
+  // console.log("headers = "+JSON.stringify(req.headers));
+  console.log("cookie = "+(req.headers?.cookie));
+	const cookieHeader_pair = (req.headers.cookie).split("=");
+  console.log("token in cookie = "+cookieHeader_pair);
 	// const cookieHeader_pair = (document.cookie["access_token"]?.split("="));
-  console.log("cookie header = "+cookieHeader_pair);
+  // console.log("cookie header = "+cookieHeader_pair);
 	if (typeof cookieHeader_pair !== 'undefined' && cookieHeader_pair[0] !== 'access_token' || typeof cookieHeader_pair === 'undefined') {
 		res.status(StatusCodes.FORBIDDEN);
 		res.send({ msg: "please login" });
 		return;
 	}
 	const token = cookieHeader_pair[1];
-
+  console.log("tokennnn = "+token);
 	let user_data_from_jwt;
 	try{	
 		if (typeof token == 'undefined') {
@@ -128,6 +133,7 @@ async function log_in(req, res)
           Error_name: err.name
         });
     }
+    console.log("user_name = "+user_name );
     res.locals.user_name = user_name;
 				
     if (typeof user_name !== 'undefined') {

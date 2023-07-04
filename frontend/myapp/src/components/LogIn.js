@@ -48,18 +48,19 @@ const LogIn = () => {
         try {
         response = await fetch('http://localhost:2718/auth/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                credentials: 'include',
                 'Access-Control-Allow-Origin': '*'
             },
             body : JSON.stringify(user)
         });
         const parsed_response = await response.json();
         localStorage.setItem("user_name", user.name);
+        console.log(response.headers);
              alert(parsed_response["msg"]);
              console.log("move to home page");
-            //  window.location.href = "/home"
+             window.location.href = "/home"
     } catch (error) {
         console.log('error = ' + error);
     }
