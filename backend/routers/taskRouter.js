@@ -50,7 +50,8 @@ async function get_task_by_id(req, res)
   async function get_task_by_status_done(req, res)
   {
     console.log("heree inn");
-    const sqlQuery = `Select * From task Where status_task = "Done";`;
+    const id = parseInt(req.params.id);
+    const sqlQuery = `Select * From task Where user_id=${id} AND status_task = "Done";`;
     connection.query(sqlQuery, function(err, result) {
       if(err){
         throw err;
@@ -60,8 +61,9 @@ async function get_task_by_id(req, res)
   }
   async function get_task_by_status_inProcess(req, res)
   {
+    const id = parseInt(req.params.id);
     console.log("heree inn");
-    const sqlQuery = `Select * From task Where status_task = "In Process";`;
+    const sqlQuery = `Select * From task Where user_id=${id} AND status_task = "In Process";`;
     connection.query(sqlQuery, function(err, result) {
       if(err){
         throw err;
@@ -126,8 +128,8 @@ async function delete_task(req, res)
 
 router.get('/tasks/(:id)', auth.authenticate_token,  (req, res) => { list_all_tasks_by_userID(req, res) });
 router.get('/task/(:id)', auth.authenticate_token,  (req, res) => { get_task_by_id(req, res) });
-router.get('/byStatusDone', auth.authenticate_token,  (req, res) => { get_task_by_status_done(req, res) });
-router.get('/byStatusInProcess', auth.authenticate_token,  (req, res) => { get_task_by_status_inProcess(req, res) });
+router.get('/byStatusDone/(:id)', auth.authenticate_token,  (req, res) => { get_task_by_status_done(req, res) });
+router.get('/byStatusInProcess/(:id)', auth.authenticate_token,  (req, res) => { get_task_by_status_inProcess(req, res) });
 
 router.post('/task', auth.authenticate_token, (req, res) => { create_new_task(req, res) });
 

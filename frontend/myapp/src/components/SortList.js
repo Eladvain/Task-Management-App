@@ -24,12 +24,12 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, upd
   }
 
   const changeStatus = async (event)=>{
- 
+    const user_id = localStorage.getItem("user_id");
     console.log("in change status sortByStatus = "+sortByStatus);
     let response;
     if(event.target.value === "In Process"){
       try {
-        response = await fetch("http://localhost:2718/tasks/byStatusInProcess", {
+        response = await fetch(`http://localhost:2718/tasks/byStatusInProcess/${user_id}`, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -44,7 +44,7 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, upd
     else if(event.target.value === "Done"){
       console.log("in Done option");
       try {
-        response = await fetch("http://localhost:2718/tasks/byStatusDone", {
+        response = await fetch(`http://localhost:2718/tasks/byStatusDone/${user_id}`, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -58,7 +58,7 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, upd
     }
     else{
       try {
-        response = await fetch("http://localhost:2718/tasks/task", {
+        response = await fetch(`http://localhost:2718/tasks/tasks/${user_id}`, {
             method: 'GET',
             credentials: 'include',
             headers: {
