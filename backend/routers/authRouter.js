@@ -74,17 +74,16 @@ async function log_in(req, res)
           {
             console.log("the same password");
             const token = jwt.sign({ name }, "secret", { expiresIn: "1d" });
-            console.log("typof = "+typeof token);
-			      const token_string = `access_token=${token}`;
-            // res.cookie('access_token', token);
-            console.log("token_string="+token_string);
+            // console.log("typof = "+typeof token);
+			      // const token_string = `access_token=${token}`;
+            
+            // console.log("token_string="+token_string);
             res.cookie("access_token", token, {
               httpOnly : true
             }).status(StatusCodes.OK);
-            // res.setHeader('set-cookie', `${token_string}` ) // create a cookie in the browser
-            // console.log("cookie = "+res.headers.cookie);
 			      res.send({token:token,
-			          msg:"You sign in"});
+                      user : result,
+			                msg:"You sign in"});
           }
           else{
             console.log("password not correct");
@@ -102,13 +101,11 @@ async function log_in(req, res)
   async function authenticate_token(req, res, next)
 {
   console.log("in authontication token");
-  // console.log("req ="+req.getHeader("Set-Cookie") );
-  // console.log("headers = "+JSON.stringify(req.headers));
+
   console.log("cookie = "+(req.headers?.cookie));
 	const cookieHeader_pair = (req.headers.cookie).split("=");
   console.log("token in cookie = "+cookieHeader_pair);
-	// const cookieHeader_pair = (document.cookie["access_token"]?.split("="));
-  // console.log("cookie header = "+cookieHeader_pair);
+
 	if (typeof cookieHeader_pair !== 'undefined' && cookieHeader_pair[0] !== 'access_token' || typeof cookieHeader_pair === 'undefined') {
 		res.status(StatusCodes.FORBIDDEN);
 		res.send({ msg: "please login" });

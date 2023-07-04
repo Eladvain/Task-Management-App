@@ -12,13 +12,17 @@ const set_content_type = function (req, res, next)
 }
 
 
-async function list_all_tasks(req,res)
+async function list_all_tasks_by_userID(req,res)
 {
-  const sqlQuery = "SELECT * FROM task";
+  const id = parseInt(req.params.id);
+  
+  const sqlQuery = `SELECT * FROM task WHERE user_id=${id}`;
   connection.query(sqlQuery, function(err, result) {
     if(err){
       throw err.message;
     }
+    console.log("in list all tasks by user id");
+    res.status(StatusCodes.OK);
     res.send({tasks : result});
   })
 }
@@ -120,7 +124,7 @@ async function delete_task(req, res)
   })
 }
 
-router.get('/task', auth.authenticate_token,  (req, res) => { list_all_tasks(req, res) });
+router.get('/tasks/(:id)', auth.authenticate_token,  (req, res) => { list_all_tasks_by_userID(req, res) });
 router.get('/task/(:id)', auth.authenticate_token,  (req, res) => { get_task_by_id(req, res) });
 router.get('/byStatusDone', auth.authenticate_token,  (req, res) => { get_task_by_status_done(req, res) });
 router.get('/byStatusInProcess', auth.authenticate_token,  (req, res) => { get_task_by_status_inProcess(req, res) });

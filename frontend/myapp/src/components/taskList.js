@@ -14,8 +14,10 @@ const TaskList = () => {
   async function updateTaskList(){
     let response;
     console.log("inside updateTaskList function");
+    const user_id = localStorage.getItem("user_id");
+    console.log("user_id = "+user_id);
     try {
-      response = await fetch("http://localhost:2718/tasks/task", {
+      response = await fetch(`http://localhost:2718/tasks/tasks/${user_id}`, {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -33,7 +35,13 @@ const TaskList = () => {
 
   }
 
+  // async function getIdUser()
+  // {
+
+  // }
+
   useEffect(()=>{
+    // await getIdUser();
     updateTaskList();
   },[])
 
