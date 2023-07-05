@@ -76,11 +76,13 @@ const CreateTask = ({updateTask}) => {
       alert("input is not valid");
       return;
     }
+    const user_id = localStorage.getItem("user_id");
     let response;
     let taskObject = {
       "name" : `${name}`,
       "endDate" : `${endDate}`,
-      "description" : `${description}`
+      "description" : `${description}`,
+      "user_id" : user_id
     }
 
     console.log("task = "+JSON.stringify(taskObject))
