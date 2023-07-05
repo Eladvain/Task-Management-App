@@ -61,7 +61,15 @@ const LogIn = () => {
              alert(parsed_response["msg"]);
             //  console.log("parsed = "+JSON.stringify(parsed_response.user[0].id));
              localStorage.setItem("user_id", parsed_response.user[0].id);
-             window.location.href = "/home"
+             localStorage.setItem("name", parsed_response.user[0].name);
+             if(parsed_response.user[0].name === "Admin")
+             {
+              window.location.href = "/adminHome"
+             }
+             else{
+              window.location.href = "/home"
+             }
+            
     } catch (error) {
         console.log('error = ' + error);
     }

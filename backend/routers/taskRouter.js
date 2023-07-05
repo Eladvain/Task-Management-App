@@ -15,8 +15,14 @@ const set_content_type = function (req, res, next)
 async function list_all_tasks_by_userID(req,res)
 {
   const id = parseInt(req.params.id);
+  let sqlQuery;
+  if(id === 6){  // id of Admin
+    sqlQuery = `SELECT * FROM task`;
+  }
+  else{
+    sqlQuery = `SELECT * FROM task WHERE user_id=${id}`;
+  }
   
-  const sqlQuery = `SELECT * FROM task WHERE user_id=${id}`;
   connection.query(sqlQuery, function(err, result) {
     if(err){
       throw err.message;
@@ -51,7 +57,16 @@ async function get_task_by_id(req, res)
   {
     console.log("heree inn");
     const id = parseInt(req.params.id);
-    const sqlQuery = `Select * From task Where user_id=${id} AND status_task = "Done";`;
+    let sqlQuery;
+    if(id === 6)
+    {
+      console.log("inside id =6");
+      sqlQuery = `SELECT * FROM task WHERE status_task="Done";`;
+    }
+    else{
+      sqlQuery = `SELECT * FROM task WHERE user_id=${id} AND status_task="Done";`;
+    }
+    
     connection.query(sqlQuery, function(err, result) {
       if(err){
         throw err;
@@ -63,7 +78,15 @@ async function get_task_by_id(req, res)
   {
     const id = parseInt(req.params.id);
     console.log("heree inn");
-    const sqlQuery = `Select * From task Where user_id=${id} AND status_task = "In Process";`;
+    let sqlQuery;
+    if(id === 6)
+    {
+      sqlQuery = `SELECT * FROM task WHERE status_task = "In Process"`;
+    }
+    else{
+      sqlQuery = `Select * From task Where user_id=${id} AND status_task = "In Process";`
+    }
+  
     connection.query(sqlQuery, function(err, result) {
       if(err){
         throw err;
