@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import SortList from '../components/SortList'
 import TaskItem from '../components/TaskItem'
 import taskListCss from '../CSS/taskList.css'
+import UsersList from './UsersList'
 
 const AdminHome = () => {
 
@@ -51,6 +52,7 @@ const AdminHome = () => {
           return <TaskItem taskItem = {task} buttonDel = {true} setByStatus = {setListByStatus} updateTask = {updateTaskList}/>
         })}
       </div>
+      <UsersList/>
     </div>
   )
 }

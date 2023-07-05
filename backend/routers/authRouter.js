@@ -47,15 +47,11 @@ async function get_all_users_name(req, res)
     if(err){
       throw err.message;
     }
+    console.log("users = "+JSON.stringify(result));
     res.send({users : result});
   })
 
 }
-
-async function get_all_users(req,res)
-{
-
-} 
 
 async function log_in(req, res)
 {
@@ -147,37 +143,30 @@ async function log_in(req, res)
   }
 }
 
+// async function get_all_users(req, res)
+// {
+//   const sqlQuery = `SELECT name FROM user'`;
   
+//   connection.query(sqlQuery, async function(err, result) {
+//     if(err){
+//       throw err.message;
+//     }
+    
+//     console.log("users = "+JSON.stringify(result));
+//     res.send({
+//               users : result,
+//               msg:"users returned"});
 
-//   try{
-//     let resp = await bcrpyt.compare(req.body.password, user.password);
-//      if(resp == true)
-//      { 
-//      const user_email = user.email;
-//      const token = jwt.sign({ user_email }, "secret", { expiresIn: "1d" });
-     
-//      const token_string = "access_token=" + token;
-//      res.setHeader('Set-Cookie', token_string +"; path=/") // create a cookie in the browser
-//      res.send({token:token,
-//                msg:"You sign in"});	 
-//       } 
-//      else{
-//        res.status(StatusCodes.FORBIDDEN);
-//        res.send({ msg: "Error password is not valid" });
-//        return;
-//      }
-     
-//  } catch (err) {
-//    console.log("Error in Auth", err);
-//    res.status( StatusCodes.BAD_REQUEST );
-//  }
-
-
+    
+// })
+// }
 
 router.post('/signin',  (req, res) => { create_new_user(req, res) });
 router.post('/login',  (req, res) => { log_in(req, res) });
 
 router.get('/usersName',  (req, res) => { get_all_users_name(req, res) });
+// router.get('/users',  (req, res) => { get_all_users(req, res) });
+
 
 router.use( set_content_type );
 module.exports = {router, authenticate_token};
