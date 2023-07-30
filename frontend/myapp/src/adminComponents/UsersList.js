@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UserItem from './UserItem';
 
-const UsersList = () => {
+const UsersList = ({updateTask}) => {
 
   const [usersList, setUsersList] = useState([]);
 
@@ -33,12 +33,30 @@ const UsersList = () => {
      getUsers();
   }, [])
 
+  const userSelect = async (event)=>{
+    event.preventDefault();
+    console.log("what selected = "+event.target.value);
+    if(event.target.value === ""){
+      localStorage.setItem("user_selected", 6);
+    }
+    else{
+      localStorage.setItem("user_selected", event.target.value);
+    }
+    
+    updateTask();
+  }
+
   return (
     <div className='users-list-div'>
       <h1> Users List</h1>
-       {usersList.map((user)=>{
-       return (user.name !== 'Admin') ?  <UserItem useritem = {user}/> : ""
+      <select name="user" id="user-select" onChange={userSelect} >
+      <option value="">--Please choose user--</option>
+      {usersList.map((user)=>{
+       return (user.name !== 'Admin') ?  <option value={user.id}>{user.name}</option> : ""
        })}
+               
+               </select>
+       
 
     </div>
   )

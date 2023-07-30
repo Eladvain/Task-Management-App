@@ -24,7 +24,7 @@ const SortList = ({sortByStatus, setSortedByStatus, taskOfList, setTaskList, upd
   }
 
   const changeStatus = async (event)=>{
-    const user_id = localStorage.getItem("user_id");
+    const user_id = localStorage.getItem("user_selected");
     console.log("in change status sortByStatus = "+sortByStatus);
     let response;
     if(event.target.value === "In Process"){

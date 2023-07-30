@@ -61,6 +61,7 @@ const LogIn = () => {
              alert(parsed_response["msg"]);
             //  console.log("parsed = "+JSON.stringify(parsed_response.user[0].id));
              localStorage.setItem("user_id", parsed_response.user[0].id);
+             localStorage.setItem("user_selected", parsed_response.user[0].id);
              localStorage.setItem("name", parsed_response.user[0].name);
              if(parsed_response.user[0].name === "Admin")
              {

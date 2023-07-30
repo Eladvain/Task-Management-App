@@ -14,7 +14,7 @@ const AdminHome = () => {
   async function updateTaskList(){
     let response;
     console.log("inside updateTaskList function -- in Admin");
-    const user_id = localStorage.getItem("user_id");
+    const user_id = localStorage.getItem("user_selected");
     console.log("user_id = "+user_id);
     try {
       response = await fetch(`http://localhost:2718/tasks/tasks/${user_id}`, {
@@ -63,7 +63,7 @@ const AdminHome = () => {
           return <TaskItem taskItem = {task} buttonDel = {true} setByStatus = {setListByStatus} updateTask = {updateTaskList}/>
         })}
       </div>
-      <UsersList/>
+      <UsersList updateTask = {updateTaskList}/>
     </div>
   )
 }
