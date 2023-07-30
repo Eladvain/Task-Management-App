@@ -42,7 +42,7 @@ async function create_new_user(req,res)
 async function get_all_users_name(req, res)
 {
   console.log("in get all users name");
-  const sqlQuery = `SELECT name FROM user`;
+  const sqlQuery = `SELECT id,name FROM user`;
   connection.query(sqlQuery, function(err, result) {
     if(err){
       throw err.message;

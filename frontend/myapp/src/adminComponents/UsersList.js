@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import UserItem from './UserItem';
 
 const UsersList = () => {
 
@@ -36,7 +37,7 @@ const UsersList = () => {
     <div className='users-list-div'>
       <h1> Users List</h1>
        {usersList.map((user)=>{
-       return (user.name !== 'Admin') ?  <h1>{user.name}</h1> : ""
+       return (user.name !== 'Admin') ?  <UserItem useritem = {user}/> : ""
        })}
 
     </div>

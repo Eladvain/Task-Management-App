@@ -8,6 +8,7 @@ const AdminHome = () => {
 
   const [taskList, setTaskList] = useState([]);
   const [listByStatus, setListByStatus] = useState(false);
+  const [interval, setIteval] = useState();
 
   
   async function updateTaskList(){
@@ -36,8 +37,18 @@ const AdminHome = () => {
 
   useEffect(()=>{
     // await getIdUser();
+    // if(listByStatus === true){
+    //  clearInterval(inter);
+    // }
+    // else{
+    //   const inter = setInterval(() => {
+    //     console.log('Interval triggered');
+    //     updateTaskList();
+    //   }, 1000);
+    // }
+    
     updateTaskList();
-  },[])
+  },[,listByStatus])
 
   return (
     <div className='main-container'>
