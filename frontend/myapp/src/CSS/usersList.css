@@ -3,10 +3,23 @@
   width: 100%;
 }
 
+
 .users-list-headline{
   color: aqua;
   left : auto;
   right: auto;
   text-align: center;
   /* border: 3px solid green */
+}
+
+.div-of-select{
+  width: 100%;
+  /* border: 3px solid green */
+}
+
+.select-user{
+  display: block;
+  margin: auto;
+  
+  
 }

@@ -50,14 +50,15 @@ const UsersList = ({updateTask}) => {
   return (
     <div className='users-list-div'>
       <h1 className='users-list-headline'> Users List</h1>
-      <select name="user" id="user-select" onChange={userSelect} >
-      <option value="">--Please choose user--</option>
-      {usersList.map((user)=>{
-       return (user.name !== 'Admin') ?  <option value={user.id}>{user.name}</option> : ""
-       })}
-               
-               </select>
-       
+      <div className='div-of-select'>
+        <select className='select-user' name="user" id="user-select" onChange={userSelect} >
+        <option value="">--Please choose user--</option>
+        {usersList.map((user)=>{
+        return (user.name !== 'Admin') ?  <option value={user.id}>{user.name}</option> : ""
+        })}
+                
+                </select>
+      </div>
 
     </div>
   )
