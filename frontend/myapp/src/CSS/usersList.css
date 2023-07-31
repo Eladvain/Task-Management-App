@@ -1,0 +1,12 @@
+.users-list-div{
+  /* border: 3px solid green; */
+  width: 100%;
+}
+
+.users-list-headline{
+  color: aqua;
+  left : auto;
+  right: auto;
+  text-align: center;
+  /* border: 3px solid green */
+}

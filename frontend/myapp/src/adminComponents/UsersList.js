@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import UserItem from './UserItem';
+import usersList from '../CSS/usersList.css';
 
 const UsersList = ({updateTask}) => {
 
@@ -48,7 +49,7 @@ const UsersList = ({updateTask}) => {
 
   return (
     <div className='users-list-div'>
-      <h1> Users List</h1>
+      <h1 className='users-list-headline'> Users List</h1>
       <select name="user" id="user-select" onChange={userSelect} >
       <option value="">--Please choose user--</option>
       {usersList.map((user)=>{
