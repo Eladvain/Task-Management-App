@@ -25,13 +25,16 @@ const UsersList = ({updateTask}) => {
   }
   const users_res = await response.json();
   const users_list = users_res["users"];
-  console.log("users_list in useEffect = "+JSON.stringify(users_list));
+  // console.log("users_list in useEffect = "+JSON.stringify(users_list));
   setUsersList([...users_list]);
 
   }
 
   useEffect(()=>{
-     getUsers();
+    setInterval(()=>{
+      getUsers();
+    },3000)
+     
   }, [])
 
   const userSelect = async (event)=>{
