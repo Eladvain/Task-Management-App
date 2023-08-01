@@ -56,8 +56,8 @@ const UsersList = ({updateTask}) => {
       <div className='div-of-select'>
         <select className='select-user' name="user" id="user-select" onChange={userSelect} >
         <option value="">--Please choose user--</option>
-        {usersList.map((user)=>{
-        return (user.name !== 'Admin') ?  <option value={user.id}>{user.name}</option> : ""
+        {usersList.map((user, i)=>{
+        return (user.name !== 'Admin') ?  <option key={i} value={user.id}>{user.name}</option> : ""
         })}
                 
                 </select>
