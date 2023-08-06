@@ -49,6 +49,8 @@ const TaskItem = ({taskItem, buttonDel, setByStatus, updateTask}) => {
       <br/>
       <label>status : {taskItem.status_task}</label>
       <br/><br/>
+      <label>share with : {taskItem.status_task}</label>
+      <br/><br/>
       {buttonDel === true ? 
         <div className='div-button'>
         <button className='delete-button' onClick={deleteTaskFromList}>Delete</button> 
